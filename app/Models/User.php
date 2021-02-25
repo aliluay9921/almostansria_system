@@ -21,8 +21,10 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'image',
-        'stage_id'
+        'phone',
+        'image'
+
+
     ];
 
     /**
@@ -33,6 +35,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'pivot'
     ];
 
     /**
@@ -46,6 +49,15 @@ class User extends Authenticatable
 
     public function stages()
     {
-        return $this->belongsTo('App\Models\stage', 'fstage_id');
+        return $this->belongsToMany('App\Models\stage', 'user__stages', 'user_id', 'stage_id');
+    }
+
+    public function materials()
+    {
+        return $this->hasMany('App\Models\Material', 'user_id');
+    }
+    public function lecturs()
+    {
+        return $this->hasMany('App\Models\Lecture', 'user_id');
     }
 }

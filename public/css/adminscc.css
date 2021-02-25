@@ -1,0 +1,52 @@
+.scroll {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.dataTables_filter {
+    float: right !important;
+}
+
+.drop {
+    width: 100%;
+    height: 120px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.drop a {
+    background-color: #ccc;
+    width: 50%;
+    height: 50px;
+    text-align: center;
+    margin: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 22px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.drop a:hover {
+    background-color: rgb(156, 154, 154);
+}
+
+.drop a p {
+    font-weight: bold;
+    font-size: 24px;
+    font-style: italic;
+}
+
+.back {
+    margin-bottom: 50px;
+    margin-top: -30px;
+}
+
+.back a {
+    width: 10%;
+}
+
+.back a i {
+    padding-right: 15px;
+}

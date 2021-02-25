@@ -16,18 +16,28 @@ class programseeder extends Seeder
     {
         Program::Create([
             'title' => 'Microsoft Visual Studio',
-            'image' => '/image_program/download.png',
+            'image' => 'download.png',
             'link'  => 'https://visualstudio.microsoft.com/'
         ]);
         Program::Create([
             'title' => 'Star UML',
-            'image' => '/image_program/Star-UML-logo.png',
+            'image' => 'Star-UML-logo.png',
             'link'  => 'https://staruml.io/download'
         ]);
         Program::Create([
             'title' => ' Microsoft Offic World',
-            'image' => '/image_program/unnamed.png',
+            'image' => 'unnamed.png',
             'link'  => 'https://microsoft_word.en.downloadastro.com/'
+        ]);
+        Program::Create([
+            'title' => 'Eclips',
+            'image' => 'images.png',
+            'link'  => 'https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2020-12/R/eclipse-inst-jre-win64.exe'
+        ]);
+        Program::Create([
+            'title' => 'Python',
+            'image' => 'python.png',
+            'link'  => 'https://www.python.org/downloads/'
         ]);
     }
 }

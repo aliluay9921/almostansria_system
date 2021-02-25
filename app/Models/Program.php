@@ -14,6 +14,6 @@ class Program extends Model
 
     public function materials()
     {
-        return $this->belongsTo('App\Models\Material', 'material_id');
+        return $this->hasMany('App\Models\Material', 'program_id');
     }
 }

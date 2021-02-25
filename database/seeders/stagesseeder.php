@@ -15,22 +15,22 @@ class stagesseeder extends Seeder
     public function run()
     {
         stage::Create([
-            'name' => 'first'
+            'name' => 'الاؤلى',
+            'image' => '1.jpg'
         ]);
         stage::Create([
-            'name' => 'seconde'
+            'name' => 'الثانية',
+            'image' => '2.jpg'
         ]);
         stage::Create([
-            'name' => 'third_CS'
+            'name' => 'الثالثة',
+            'image' => '3.jpg'
+
         ]);
         stage::Create([
-            'name' => 'third_IT'
-        ]);
-        stage::Create([
-            'name' => 'fourth_CS'
-        ]);
-        stage::Create([
-            'name' => 'fourth_IT'
+            'name' => 'الرابعة',
+            'image' => '4.jpg'
+
         ]);
     }
 }

@@ -15,16 +15,36 @@ class userseeder extends Seeder
     public function run()
     {
         User::create([
-            'name'    => 'علي لؤي خلف ',
+            'name'    => 'علي لؤي خلف',
             'email'   => 'ali@gmail.com',
             'password' => bcrypt('11111111'),
-            'role'    => 1
+            'image'    => '111.jpg',
+            'role'    => 1,
+            'phone'   => 825
         ]);
         User::create([
-            'name'    => 'يوسف ',
+            'name'    => 'يوسف',
             'email'   => 'yousuf@gmail.com',
             'password' => bcrypt('11111111'),
-            'role'    => 2
+            'image'    => '1611403346.b.png',
+            'role'    => 2,
+            'phone'   => 252
+        ]);
+        User::create([
+            'name'    => 'ابراهيم',
+            'email'   => 'ibrahim@gmail.com',
+            'password' => bcrypt('11111111'),
+            'image'    => '1611403346.b.png',
+            'role'    => 2,
+            'phone'   => 141414
+        ]);
+        User::create([
+            'name'    => 'حسين',
+            'email'   => 'hussen@gmail.com',
+            'password' => bcrypt('11111111'),
+            'image'    => '1611403562.download.png',
+            'role'    => 2,
+            'phone'   => 252
         ]);
     }
 }

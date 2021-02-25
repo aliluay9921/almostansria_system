@@ -14,12 +14,13 @@ class CreateMaterialsTable extends Migration
     public function up()
     {
         Schema::create('materials', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('title');
             $table->text('desc');
-            $table->integer('user_id');
-            $table->integer('stage_id');
-            $table->integer('program_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->integer('branch_id')->nullable();
+            $table->integer('stage_id')->nullable();
+            $table->integer('program_id')->nullable();
             $table->timestamps();
         });
     }

@@ -2,21 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Material;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class programController extends Controller
 {
+    public function programAdmin()
+    {
+        $get = Program::with('materials')->get();
+
+        return view('allProgramAdmin', compact('get'));
+    }
+
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'title' => 'required|alpha',
+            'title' => 'required|unique:programs,title',
             'link'    => 'required',
-            'image'    => 'required|image',
+            'image'    => 'required|mimes:jpeg,jpg,png,gif,jfif',
         ]);
         if ($validation->fails()) {
-            return back()->with(['errors' => 'Program is found ']);
+            return response()->json(['errors' => $validation->errors()->all()]);
         }
 
         $file_extension = $request->image->getClientOriginalName();
@@ -31,9 +39,28 @@ class programController extends Controller
         ]);
         return back()->with(['message' => 'successfuly insert']);
     }
+
     public function index()
     {
         $get = Program::all();
-        return view('program');
+        return view('program', compact('get'));
+    }
+    public function delete(Request $request)
+    {
+        Material::where('program_id', $request->id)->update([
+            'program_id' => null
+        ]);
+        $get = Program::find($request->id);
+
+        if (!$get)
+            return redirect()->back();
+
+        $get->delete();
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'تم الحذف بنجاح',
+            'id' =>  $request->id
+        ]);
     }
 }

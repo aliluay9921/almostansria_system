@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Material;
-use App\Models\Program;
-use App\Models\Stage;
+use App\Models\branch;
+use App\Models\Lecture;
 use App\Models\User;
+use App\Models\Stage;
+use App\Models\Program;
+use App\Models\Material;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,21 +20,25 @@ class ownerController extends Controller
     {
         $countusers = User::all();
         $stages = Stage::all();
+        $branch = branch::all();
         $countprograms = Program::all();
         $material = Material::all();
-        return view('owner', compact('countusers', 'stages', 'countprograms', 'material'));
+        $lectures = Lecture::all();
+        return view('owner', compact('countusers', 'stages', 'countprograms', 'material', 'branch', 'lectures'));
     }
 
     public function store(Request $request)
     {
+
         $validation = Validator::make($request->all(), [
-            'fullName' => 'required|alpha',
+            'fullName' => 'required',
             'email'    => 'required',
             'password' => 'required|min:6',
-            'image'    => 'required|image',
+            'phone'    => 'required',
+            'image'    => 'required|mimes:jpeg,jpg,png',
         ]);
         if ($validation->fails()) {
-            return back()->withErrors($validation->errors());
+            return response()->json(['errors' => $validation->errors()->all()]);
         }
 
         $file_extension = $request->image->getClientOriginalName();
@@ -43,9 +50,67 @@ class ownerController extends Controller
             'name' => $request->fullName,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'phone'    => $request->phone,
             'image'    => $file_name
-
         ]);
-        return back()->with(['message' => 'successfuly insert']);
+        $adduser->stages()->attach($request->stage_id);
+
+        $stages = $request->stage_id;
+
+        $get = Stage::select('name')->where('id', $stages)->get();
+
+
+        return response()->json([
+            'status' => true,
+            'message' => 'تم الاضافة بنجاح',
+            'data' =>  $adduser,
+            'stage' =>  $get
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+
+        if (isset($request->image)) {
+            $file_extension = $request->image->getClientOriginalName();
+            $file_nameImage = time() . '.' . $file_extension;
+            $path = 'image';
+            $request->image->move($path, $file_nameImage);
+            User::find($request->id)->update([
+                'name' => $request->fullName,
+                'email' => $request->email,
+                'phone'    => $request->phone,
+                'image'     => $file_nameImage
+
+            ]);
+        } else {
+            User::find($request->id)->update([
+                'name' => $request->fullName,
+                'email' => $request->email,
+                'phone'    => $request->phone,
+            ]);
+        }
+        return back()->with(['message' => 'successfuly update']);
+    }
+
+
+    public function delete(Request $request)
+    {
+
+        $get = User::find($request->id);
+        if (!$get)
+            return redirect()->back();
+
+        Material::where('user_id', $request->id)->update([
+            'user_id' => null
+        ]);
+
+        $get->delete();
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'تم الحذف بنجاح',
+            'id' =>  $request->id
+        ]);
     }
 }

@@ -9,7 +9,7 @@ class Material extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title', 'desc', 'stage_id', 'user_id', 'program_id'
+        'title', 'desc', 'stage_id', 'user_id', 'program_id', 'branch_id'
     ];
 
     public function users()
@@ -20,5 +20,20 @@ class Material extends Model
     public function stages()
     {
         return $this->belongsTo('App\Models\stage', 'stage_id');
+    }
+
+    public function branchs()
+    {
+        return $this->belongsTo('App\Models\branch', 'branch_id');
+    }
+
+    public function program()
+    {
+        return $this->belongsTo('App\Models\program', 'program_id');
+    }
+
+    public function lecturs()
+    {
+        return $this->hasMany('App\Models\Lecture', 'material_id');
     }
 }
