@@ -40,12 +40,10 @@ class ownerController extends Controller
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->errors()->all()]);
         }
-
         $file_extension = $request->image->getClientOriginalName();
         $file_name = time() . '.' . $file_extension;
         $path = 'user_image';
         $request->image->move($path, $file_name);
-
         $adduser = User::create([
             'name' => $request->fullName,
             'email' => $request->email,
@@ -54,9 +52,7 @@ class ownerController extends Controller
             'image'    => $file_name
         ]);
         $adduser->stages()->attach($request->stage_id);
-
         $stages = $request->stage_id;
-
         $get = Stage::select('name')->where('id', $stages)->get();
 
 
@@ -73,14 +69,14 @@ class ownerController extends Controller
 
         if (isset($request->image)) {
             $file_extension = $request->image->getClientOriginalName();
-            $file_nameImage = time() . '.' . $file_extension;
-            $path = 'image';
-            $request->image->move($path, $file_nameImage);
+            $file_name = time() . '.' . $file_extension;
+            $path = 'user_image';
+            $request->image->move($path, $file_name);
             User::find($request->id)->update([
                 'name' => $request->fullName,
                 'email' => $request->email,
                 'phone'    => $request->phone,
-                'image'     => $file_nameImage
+                'image'     => $file_name
 
             ]);
         } else {
@@ -90,7 +86,7 @@ class ownerController extends Controller
                 'phone'    => $request->phone,
             ]);
         }
-        return back()->with(['message' => 'successfuly update']);
+        return back()->with(['message' => 'تم التحديث بنجاح ']);
     }
 
 

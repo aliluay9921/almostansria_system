@@ -11,28 +11,40 @@
 
         @endforeach
     </div>
-
-
-
     <div class="containerMAterialALL">
         @foreach ($get as $item)
-            <a class="card1" href="{{ route('get.lecture', $item->id) }}">
-                <h3 class="materialH3">{{ $item->title }}</h3>
-                <p class="small"><b>{{ $item->desc }}</b></p>
-                <p class="countMAt"><b>عدد المحاضرات </b><span>{{ $item->lecturs->count() }}</span></p>
-                <p class="doctorName">
-                    @if (empty($item->users->name))
-                        <b>تم حذف التدريسي</b>
-                    @else
-                        <b>د. {{ $item->users->name }}</b>
-                    @endif
-                </p>
-                <div class="go-corner">
-                    <div class=" go-arrow">
-                        →
+            <div class="card1">
+                <a href="{{ route('get.lecture', $item->id) }}">
+                    <h3 class="materialH3">{{ $item->title }}</h3>
+                    <p class="small"><b>{{ $item->desc }}</b></p>
+                    <p class="countMAt"><b>عدد المحاضرات </b><span>{{ $item->lecturs->count() }}</span></p>
+                    <p class="doctorName">
+                        @if (empty($item->users->name))
+                            <b>تم حذف التدريسي</b>
+                        @else
+                            <b>د. {{ $item->users->name }}</b>
+                        @endif
+                    </p>
+
+
+                    <div class="go-corner">
+                        <div class=" go-arrow">
+                            →
+                        </div>
                     </div>
-                </div>
-            </a>
+
+                </a>
+                @if (empty($item->refrence))
+                    <div class="refrence">
+                        <span class="btn btn-secondary">لم يتم تحميل المصادر </span>
+                    </div>
+                @else
+                    <div class="refrence">
+                        <a href="{{ $item->refrence->link }}" class="btn btn-info">مصادر</a>
+                    </div>
+                @endif
+            </div>
+
         @endforeach
     </div>
 

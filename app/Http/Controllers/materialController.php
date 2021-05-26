@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Stage;
 use App\Models\branch;
 use App\Models\Material;
-use App\Models\Stage;
+use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,7 +15,7 @@ class materialController extends Controller
 
     public function index($stage_id, $branch_id)
     {
-        $get = Material::where('stage_id', $stage_id)->with('users', 'lecturs');
+        $get = Material::where('stage_id', $stage_id)->with('users', 'lecturs', 'refrence');
         //  $stageInfo = $branch_id != -1 ? [] : Stage::find($stage_id)->branch;
         $stageInfo = Stage::find($stage_id)->branch;
 
@@ -21,6 +23,7 @@ class materialController extends Controller
             $get = $get->where('branch_id', $branch_id);
         }
         $count = $get->count();
+
         $get = $get->get();
         return view('allmaterial', compact('get', 'stageInfo', 'stage_id', 'count'));
     }
@@ -33,9 +36,11 @@ class materialController extends Controller
         if ($branch_id != -1) {
             $get = $get->where('branch_id', $branch_id);
         }
+        $doctors = User::all();
+        $programs = Program::all();
         $count = $get->count();
         $get = $get->get();
-        return view('allMaterialAdmin', compact('get', 'stageInfo', 'stage_id', 'count'));
+        return view('allMaterialAdmin', compact('get', 'stageInfo', 'stage_id', 'count', 'doctors', 'programs'));
     }
 
 
@@ -67,5 +72,16 @@ class materialController extends Controller
         ]);
 
         return back()->with(['message' => 'successfuly insert']);
+    }
+    public function update(Request $request)
+    {
+        Material::find($request->id)->update([
+            'title' => $request->title,
+            'desc'    => $request->desc,
+            'user_id' => $request->user_id,
+            'program_id' => $request->program_id,
+        ]);
+
+        return back()->with(['message' => 'تم التحديث بنجاح']);
     }
 }

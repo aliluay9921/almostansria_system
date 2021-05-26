@@ -1,9 +1,32 @@
 @extends('layouts.userlayout')
 
 @section('usercontent')
+    <link rel="stylesheet" href="/css/program.css">
+    <div class="container-fluid mt-5">
+        <div class="row">
 
 
-    <div class="container">
+
+            @foreach ($get as $program)
+
+                <div class="paper"><img class="poster" src="/image_program/{{ $program->image }}" />
+                    <h2>{{ $program->title }}</h2>
+                    <hr />
+                    <a href="{{ $program->link }}" class="btn">Dawnload
+                    </a>
+
+                    <div class="space"></div>
+                </div>
+
+            @endforeach
+        </div>
+    </div>
+
+
+
+
+
+    {{-- <div class="container">
         <div class="row">
             @foreach ($get as $program)
 
@@ -24,8 +47,7 @@
                 </div>
             @endforeach
         </div>
-    </div>
-
+    </div> --}}
 
 
 

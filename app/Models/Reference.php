@@ -11,9 +11,4 @@ class Reference extends Model
     protected $fillable = [
         'name', 'link', 'material_id'
     ];
-
-    public function materials()
-    {
-        return $this->belongsTo('App\Models\Material', 'material_id');
-    }
 }

@@ -40,8 +40,7 @@
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           with font-awesome or any other icon font library -->
+
                     <li class="nav-item menu-open">
                         <a href="#" class="nav-link active">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -147,7 +146,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             document.getElementById('logout-form').submit();">
                             تسجيل خروج
                         </a>
 
@@ -282,6 +281,20 @@
                     @endif
                     <!-- ./col -->
                 </div>
+                @if (session()->has('message'))
+                    <div class="alert alert-success text-center" id="successMsg" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4> {{ session()->get('message') }}</h4>
+                    </div>
+                @elseif(session()->has('errors'))
+                    <div class="alert alert-danger" id="successMsg">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 <!-- /.row -->
                 <!-- Main row -->
 
@@ -371,11 +384,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="alert alert-danger" style="display:none"></div>
-                        <div class="alert alert-success text-center" id="successmsg" role="alert" style="display:none">
-                            <h3> تم الحفظ بنجاح</h3>
-                        </div>
-                        <form id="editFormUser" method="PUT" action="{{ route('updateUser') }}">
+
+
+                        <form id="editFormUser" enctype="multipart/form-data" method="Post"
+                            action="{{ route('updateUser') }}">
                             @csrf
                             {{ method_field('PUT') }}
                             <input type="hidden" name="id" id="id">
@@ -386,7 +398,7 @@
                             </div>
                             <div class="form-group">
                                 <label>image</label>
-                                <input type="file" name="photo" id="photo" class="form-control-file">
+                                <input type="file" name="image" id="image" class="form-control-file">
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">Email address</label>
@@ -584,11 +596,7 @@
                                 <input type="file" id="file" name="file" class="form-control-file"
                                     id="exampleFormControlFile1">
                             </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlFile1">صورة تعريفية</label>
-                                <input type="file" id="image" name="image" class="form-control-file"
-                                    id="exampleFormControlFile1">
-                            </div>
+
 
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">المادة</label>
@@ -718,7 +726,7 @@
                                                 <td>{{ $doctor->phone }}</td>
                                                 <td>{{ $doctor->created_at->format('d/m/Y') }}</td>
                                                 <td>
-                                                    <a type="button" href="" data-name="{{ $doctor->name }}"
+                                                    <a type="button" href="#" data-name="{{ $doctor->name }}"
                                                         data-email="{{ $doctor->email }}"
                                                         data-stages="{{ $doctor->stages }}"
                                                         data-phone="{{ $doctor->phone }}" data-id="{{ $doctor->id }}"
@@ -751,7 +759,7 @@
                         </div>
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">التدريسين </h3>
+                                <h3 class="card-title">المحاضرات </h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -762,7 +770,6 @@
                                             <th scope="col">عنوان المحاضرة</th>
                                             <th scope="col">وصف المحاضرة</th>
                                             <th scope="col">المادة</th>
-                                            <th scope="col">الصورة</th>
                                             <th scope="col">الكود </th>
                                             <th scope="col">تأريخ الاضافة </th>
                                             <th scope="col">عمليات </th>
@@ -778,13 +785,9 @@
                                                     <td>{{ $lecture->title }}</td>
                                                     <td class="w-25">{{ $lecture->desc }}</td>
                                                     <td>{{ $lecture->materials->title }}</td>
+                                                    <td><a href="{{ route('download', $lecture->code) }}" class=" btn
+                                                                        btn-info">تحميل الكود</a></td>
 
-                                                    <td> <img class="brand-image img-circle elevation-3"
-                                                            src="/image/{{ $lecture->image }}" width="50px"
-                                                            height="50px">
-                                                    </td>
-
-                                                    <td>{{ $lecture->code }}</td>
                                                     <td>{{ $lecture->created_at->format('d/m/Y') }}
                                                     </td>
                                                     <td>
@@ -898,8 +901,7 @@
                                     ' "><td> New Lecture </td><td>' +
                                     response.data.title + '</td><td>' + response.data.desc +
                                     ' </td><td>' + response.material.title +
-                                    ' </td><td><img width="50px" height="50px"   class="brand-image img-circle elevation-3" src="/image/' +
-                                    response.data.image + '"/></td><td>' +
+                                    ' </td><td>' +
                                     response.data.code + '</td><td>' + response.data
                                     .created_at +
                                     '</td> <td ><a href="" class="btn btn-success">تعديل</a> <a href="" offer_id=" ' +
@@ -1022,7 +1024,7 @@
                         contentType: false,
                         cache: false,
                         success: function(response) {
-                            console.log(response.data)
+
                             if (response.errors) {
                                 $('.alert-danger').html('');
                                 $.each(response.errors, function(key, value) {
@@ -1219,6 +1221,12 @@
                 modal.find('.modal-body  #phone').val(phone)
                 modal.find('.modal-body  #stage_id').val(stages)
             });
+
+        </script>
+        <script>
+            setTimeout(function() {
+                $('#successMsg').hide();
+            }, 2000);
 
         </script>
 

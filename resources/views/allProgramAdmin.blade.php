@@ -46,7 +46,9 @@
                                         </td>
 
                                         <td><a class="btn btn-primary" href="{{ $program->link }}">تحميل البرنامج</a>
-                                            <a href="" class="btn btn-success">تعديل</a>
+                                            <a data-target="#editProgram" data-toggle="modal" class="btn btn-success"
+                                                data-id="{{ $program->id }}" data-title=" {{ $program->title }}"
+                                                data-link="{{ $program->link }}">تعديل</a>
                                             <a href="#" offer_id="{{ $program->id }}"
                                                 class=" delete_btn btn btn-danger">حذف</a>
                                         </td>
@@ -59,6 +61,54 @@
                         </table>
                     </div>
                     <!-- /.card-body -->
+
+
+                    <div class="modal fade" id="editProgram" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">تعديل البرامج </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="alert alert-danger" style="display:none"></div>
+                                    <div class="alert alert-success text-center" id="successmsg" role="alert"
+                                        style="display:none">
+                                        <h3> تم الحفظ بنجاح</h3>
+                                    </div>
+                                    <form id="editFromProgram" method="Post" enctype="multipart/form-data"
+                                        action="{{ route('update.program') }}">
+                                        @csrf
+                                        {{ method_field('PUT') }}
+                                        <input type="hidden" name="id" id="id">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">اسم البرنامج</label>
+                                            <input type="text" name="title" id="title" class="form-control"
+                                                placeholder="title">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>الصورة</label>
+                                            <input type="file" name="image" id="image" class="form-control-file">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">رابط التحميل </label>
+                                            <input type="text" name="link" id="link" class="form-control"
+                                                id="exampleFormControlInput1" placeholder="name@example.com">
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">غلق</button>
+                                            <button type="submit" class="btn btn-primary">تعديل</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,6 +177,21 @@
             } else {
                 return false;
             }
+        });
+
+    </script>
+    <script>
+        $('#editProgram').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id');
+            var title = button.data('title');
+            var link = button.data('link');
+
+            var modal = $(this)
+            modal.find('.modal-body  #id').val(id)
+            modal.find('.modal-body  #title').val(title)
+            modal.find('.modal-body  #link').val(link)
+
         });
 
     </script>

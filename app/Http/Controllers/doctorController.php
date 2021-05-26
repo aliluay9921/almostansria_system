@@ -30,7 +30,6 @@ class doctorController extends Controller
             'link'     => 'required',
             'desc'     => 'required',
             'file'     => 'required|mimes:pdf,docx,mimes:doc|max:10000',
-            'image'    => 'required|mimes:jpg,png,jpeg',
             'material_id' => 'required'
         ]);
         if ($validation->fails()) {
@@ -42,19 +41,18 @@ class doctorController extends Controller
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $request->file->move('codepdf/', $filename);
         }
-        if ($request->has('image')) {
-            $file_extension = $request->image->getClientOriginalName();
-            $file_nameImage = time() . '.' . $file_extension;
-            $path = 'image';
-            $request->image->move($path, $file_nameImage);
-        }
+        // if ($request->has('image')) {
+        //     $file_extension = $request->image->getClientOriginalName();
+        //     $file_nameImage = time() . '.' . $file_extension;
+        //     $path = 'image';
+        //     $request->image->move($path, $file_nameImage);
+        // }
 
         $addlecture = Lecture::create([
             'title' => $request->title,
             'link' => $request->link,
             'desc' => $request->desc,
             'code' => $filename,
-            'image' => $file_nameImage,
             'user_id' => auth()->user()->id,
             'material_id' => $request->material_id
         ]);

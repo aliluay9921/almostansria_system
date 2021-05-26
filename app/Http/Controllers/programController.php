@@ -29,7 +29,7 @@ class programController extends Controller
 
         $file_extension = $request->image->getClientOriginalName();
         $file_name = time() . '.' . $file_extension;
-        $path = '/image_program';
+        $path = 'image_program';
         $request->image->move($path, $file_name);
 
         Program::create([
@@ -62,5 +62,27 @@ class programController extends Controller
             'msg' => 'تم الحذف بنجاح',
             'id' =>  $request->id
         ]);
+    }
+    public function update(Request $request)
+    {
+        if (isset($request->image)) {
+            $file_extension = $request->image->getClientOriginalName();
+            $file_nameImage = time() . '.' . $file_extension;
+            $path = 'image_program';
+            $request->image->move($path, $file_nameImage);
+
+
+            Program::find($request->id)->update([
+                'title' => $request->title,
+                'image' => $file_nameImage,
+                'link'  => $request->link,
+            ]);
+        } else {
+            Program::find($request->id)->update([
+                'title' => $request->title,
+                'link'    => $request->link,
+            ]);
+        }
+        return back()->with(['message' => 'successfuly update']);
     }
 }

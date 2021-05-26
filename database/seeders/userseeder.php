@@ -18,7 +18,7 @@ class userseeder extends Seeder
             'name'    => 'علي لؤي خلف',
             'email'   => 'ali@gmail.com',
             'password' => bcrypt('11111111'),
-            'image'    => '111.jpg',
+            'image'    => '1613921508.Asset 7@12x.png',
             'role'    => 1,
             'phone'   => 825
         ]);

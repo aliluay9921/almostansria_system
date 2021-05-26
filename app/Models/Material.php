@@ -36,4 +36,9 @@ class Material extends Model
     {
         return $this->hasMany('App\Models\Lecture', 'material_id');
     }
+
+    public function refrence()
+    {
+        return $this->hasOne('App\Models\Reference', 'material_id');
+    }
 }

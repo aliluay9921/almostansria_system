@@ -37,8 +37,9 @@ route::delete('/deleteUser', [App\Http\Controllers\ownerController::class, 'dele
 
 route::get('matiral\{stage_id}\{branch_id}', [App\Http\Controllers\materialController::class, 'index'])->name('getmatiral');
 route::get('matiralAdmin\{stage_id}\{branch_id}', [App\Http\Controllers\materialController::class, 'allMaterialAdmin'])->name('getmatiralAdmin');
-
+route::put('maerial', [App\Http\Controllers\materialController::class, 'update'])->name('updateMaterial');
 route::post('maerial', [App\Http\Controllers\materialController::class, 'store'])->name('addMaterial');
+
 
 route::get('lecture/{material_id}', [App\Http\Controllers\doctorController::class, 'index'])->name('get.lecture');
 route::get('lectureAdmin/{material_id}', [App\Http\Controllers\doctorController::class, 'getlectureAdmin'])->name('get.lectureAdmin');
@@ -46,10 +47,12 @@ route::post('lecture', [App\Http\Controllers\doctorController::class, 'store'])-
 route::delete('/lecture', [App\Http\Controllers\doctorController::class, 'delete'])->name('deletelecture');
 
 route::post('reference', [App\Http\Controllers\doctorController::class, 'create'])->name('add.reference');
+route::get('get_reference', [App\Http\Controllers\doctorController::class, 'getRefrence']);
 
 
 Route::get('/program', [App\Http\Controllers\programController::class, 'index'])->name('program');
 Route::get('/programAdmin', [App\Http\Controllers\programController::class, 'programAdmin'])->name('allProgramAdmin');
+route::put('/program', [App\Http\Controllers\programController::class, 'update'])->name('update.program');
 route::post('/program', [App\Http\Controllers\programController::class, 'store'])->name('add.program');
 route::delete('/program', [App\Http\Controllers\programController::class, 'delete'])->name('delete');
 
