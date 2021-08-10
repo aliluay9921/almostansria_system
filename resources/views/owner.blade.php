@@ -61,20 +61,22 @@
 
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
+                        <ul class="nav nav-treeview text-right ">
                             @if (auth()->user()->role === 1)
-                                <li class="nav-item">
+                                <li class="nav-item  ">
                                     <a type="button" class="nav-link" data-toggle="modal" data-target="#Material">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>اضافة مادة </p>
+                                        <i class="fas fa-plus-circle float-left ">
+                                        </i>
+                                        <p class="ml-5">اضافة مادة </p>
+
                                     </a>
                                 </li>
                             @endif
                             @if (auth()->user()->role === 2)
                                 <li class="nav-item">
                                     <a type="button" class="nav-link" data-toggle="modal" data-target="#lecture">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>اضافة محاضرة</p>
+                                        <i class="fas fa-plus-circle mr-5"></i>
+                                        <p class="ml-5">اضافة محاضرة</p>
                                     </a>
                                 </li>
                             @endif
@@ -83,15 +85,15 @@
                             @if (auth()->user()->role === 1)
                                 <li class="nav-item">
                                     <a type="button" class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>اضافة تدريسي</p>
+                                        <i class="fas fa-plus-circle float-left"></i>
+                                        <p class="ml-5">اضافة تدريسي</p>
                                     </a>
                                 </li>
                             @endif
 
                             <li class="nav-item">
                                 <a type="button" class="nav-link" data-toggle="modal" data-target="#program">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-plus-circle float-left"></i>
                                     <p>اضافة برنامج</p>
                                 </a>
                             </li>
@@ -100,8 +102,8 @@
                             @if (auth()->user()->role === 2)
                                 <li class="nav-item">
                                     <a type="button" class="nav-link" data-toggle="modal" data-target="#addrefrence">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>اضافة مرجع</p>
+                                        <i class="fas fa-plus-circle float-left"></i>
+                                        <p class="ml-5">اضافة مرجع</p>
                                     </a>
                                 </li>
                             @endif
@@ -127,14 +129,14 @@
 
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            <ul class="nav nav-treeview text-right">
                                 @foreach ($stages as $stage)
                                     <li class="nav-item">
                                         <a href="{{ route('getmatiralAdmin', ['stage_id' => $stage->id, 'branch_id' => -1]) }}"
                                             type=" button" class="nav-link">
 
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>{{ $stage->name }} </p>
+                                            <i class="fab fa-app-store-ios float-left"></i>
+                                            <p class="ml-5">{{ $stage->name }} </p>
                                         </a>
                                     </li>
                                 @endforeach
@@ -146,7 +148,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 document.getElementById('logout-form').submit();">
                             تسجيل خروج
                         </a>
 
@@ -189,7 +191,7 @@
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     @endif
@@ -203,7 +205,7 @@
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     @endif
@@ -222,7 +224,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     @endif
@@ -239,7 +241,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     @endif
@@ -253,12 +255,12 @@
                                     <h3 id="userscount">{{ $countusers->count() }}</h3>
 
 
-                                    <p>User Registrations</p>
+                                    <p>المستخدمين الحالين </p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     @endif
@@ -275,7 +277,7 @@
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     @endif
@@ -326,30 +328,30 @@
                             @csrf
 
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">fullName</label>
+                                <label for="exampleFormControlInput1">الاسم الكامل </label>
                                 <input type="text" name="fullName" id="fullName" class="form-control"
                                     placeholder="fullName">
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Email address</label>
+                                <label for="exampleFormControlInput1">البريد الالكترونيs</label>
                                 <input type="email" name="email" id="email" class="form-control"
                                     id="exampleFormControlInput1" placeholder="name@example.com">
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">phone</label>
+                                <label for="exampleFormControlInput1">رقم الهاتف</label>
                                 <input type="text" name="phone" id="phone" class="form-control"
                                     id="exampleFormControlInput1" placeholder="name@example.com">
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Password</label>
+                                <label for="exampleFormControlInput1">كلمة المرور</label>
                                 <input type="Password" name="password" id="password" class="form-control"
                                     placeholder="Password">
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleFormControlFile1">image</label>
+                                <label for="exampleFormControlFile1">صورة</label>
                                 <input type="file" name="image" id="image" class="form-control-file"
                                     id="exampleFormControlFile1">
                             </div>
@@ -363,8 +365,8 @@
                                 </select>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Add</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
+                                <button type="submit" class="btn btn-primary">اضافة</button>
                             </div>
                         </form>
                     </div>
@@ -386,29 +388,29 @@
                     <div class="modal-body">
 
 
-                        <form id="editFormUser" enctype="multipart/form-data" method="Post"
+                        <form id="editFormlecture" enctype="multipart/form-data" method="Post"
                             action="{{ route('updateUser') }}">
                             @csrf
                             {{ method_field('PUT') }}
                             <input type="hidden" name="id" id="id">
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">fullName</label>
+                                <label for="exampleFormControlInput1">الاسم الكامل</label>
                                 <input type="text" name="fullName" id="fullName" class="form-control"
                                     placeholder="fullName">
                             </div>
                             <div class="form-group">
-                                <label>image</label>
+                                <label>الصورة</label>
                                 <input type="file" name="image" id="image" class="form-control-file">
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Email address</label>
+                                <label for="exampleFormControlInput1">البريد الالكتروني</label>
                                 <input type="email" name="email" id="email" class="form-control"
                                     id="exampleFormControlInput1" placeholder="name@example.com">
                             </div>
 
 
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">phone</label>
+                                <label for="exampleFormControlInput1">رقم الهاتف</label>
                                 <input type="text" name="phone" id="phone" class="form-control"
                                     placeholder="name@example.com">
                             </div>
@@ -423,8 +425,8 @@
                                 </select>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Add</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
+                                <button type="submit" class="btn btn-primary">اضافة</button>
                             </div>
                         </form>
                     </div>
@@ -432,6 +434,76 @@
                 </div>
             </div>
         </div>
+
+        {{-- تعديل محاضرة --}}
+
+
+
+        <div class="modal fade" id="editlecture" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">تعديل المحاضرة</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <form id="editFormUser" enctype="multipart/form-data" method="Post"
+                            action="{{ route('updateLecture') }}">
+                            @csrf
+                            {{ method_field('PUT') }}
+                            <input type="hidden" name="id" id="id">
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">عنوان المحاضرة</label>
+                                <input type="text" name="title" id="title" class="form-control" placeholder="title">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">وصف المحاضرة</label>
+                                <input type="text" name="desc" id="desc" class="form-control" id="exampleFormControlInput1">
+                            </div>
+
+
+
+
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">المادة</label>
+                                <select name="materials" id="materials" class="form-control">
+                                    <option>اختر مادة</option>
+                                    @foreach ($material as $item)
+                                        @if (auth()->user()->id == $item->user_id)
+                                            <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                        @endif
+
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>الصورة</label>
+                                <input type="file" name="image" id="image" class="form-control-file">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">محتوى المحاضرة</label>
+                                <input type="file" id="file" name="file" class="form-control-file"
+                                    id="exampleFormControlFile1">
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
+                                <button type="submit" class="btn btn-primary">تعديل</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
 
 
 
@@ -505,7 +577,7 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
                                 <button type="submit" class="btn btn-primary">اضافة مادة</button>
                             </div>
                         </form>
@@ -549,7 +621,7 @@
                                 <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
                                 <button type="submit" class="btn btn-primary">اضافة برنامج</button>
                             </div>
                         </form>
@@ -594,6 +666,11 @@
                             <div class="form-group">
                                 <label for="exampleFormControlFile1">الكود المحاضرة</label>
                                 <input type="file" id="file" name="file" class="form-control-file"
+                                    id="exampleFormControlFile1">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">صورة </label>
+                                <input type="file" id="image" name="image" class="form-control-file"
                                     id="exampleFormControlFile1">
                             </div>
 
@@ -785,14 +862,18 @@
                                                     <td>{{ $lecture->title }}</td>
                                                     <td class="w-25">{{ $lecture->desc }}</td>
                                                     <td>{{ $lecture->materials->title }}</td>
-                                                    <td><a href="{{ route('download', $lecture->code) }}" class=" btn
-                                                                        btn-info">تحميل الكود</a></td>
+                                                    <td><a href="{{ route('download', $lecture->code) }}"
+                                                            class="btn btn-info">تحميل
+                                                            الكود</a>
+                                                    </td>
 
                                                     <td>{{ $lecture->created_at->format('d/m/Y') }}
                                                     </td>
                                                     <td>
-                                                        <a href=" #" class="btn btn-success">تعديل
-                                                        </a>
+                                                        <a type="button" class="btn btn-success" data-toggle="modal"
+                                                            data-target="#editlecture" data-id="{{ $lecture->id }}"
+                                                            data-title="{{ $lecture->title }}"
+                                                            data-desc="{{ $lecture->desc }}">تعديل</a>
                                                         <a href="#" offer_id="{{ $lecture->id }}"
                                                             class=" delete_lecture btn btn-danger"> حذف
 
@@ -852,13 +933,12 @@
                                 }, 2000);
                                 $("#name").val("");
                                 $("#link").val("");
-                                $("#material_id").val("اختر مادة  ");
+
                             }
                         },
                     });
                 });
             });
-
         </script>
 
 
@@ -901,8 +981,8 @@
                                     ' "><td> New Lecture </td><td>' +
                                     response.data.title + '</td><td>' + response.data.desc +
                                     ' </td><td>' + response.material.title +
-                                    ' </td><td>' +
-                                    response.data.code + '</td><td>' + response.data
+                                    ' </td><td><a href="#" class="btn btn-info">تحميل الكود</a> </td><td>' +
+                                    response.data
                                     .created_at +
                                     '</td> <td ><a href="" class="btn btn-success">تعديل</a> <a href="" offer_id=" ' +
                                     response.data.id +
@@ -917,7 +997,6 @@
                                 $("#link").val("");
                                 $("#desc").val("");
                                 $("#file").val("");
-                                $("#material_id").val("اختر مادة  ");
                             }
                         },
                     });
@@ -925,7 +1004,6 @@
 
                 });
             });
-
         </script>
 
 
@@ -968,7 +1046,6 @@
 
                 });
             });
-
         </script>
 
 
@@ -1000,15 +1077,13 @@
                                 }, 2000);
                                 $("#title").val("");
                                 $("#desc").val("");
-                                $("#material_id").val("اختر مادة  ");
-                                $("#user_id").val("اختر تدريسي  ");
+                                $("#user_id").val("اختر تدريسي");
                                 $("#stage_id").val("اختر مرحلة دراسية  ");
                             }
                         },
                     });
                 });
             });
-
         </script>
 
         <script type="text/javascript">
@@ -1076,7 +1151,6 @@
                 });
             });
             //
-
         </script>
 
 
@@ -1115,7 +1189,6 @@
                     "responsive": true,
                 });
             });
-
         </script>
         <script>
             $(document).on('click', '.delete_btn', function(e) {
@@ -1148,7 +1221,6 @@
                     return false;
                 }
             });
-
         </script>
         <script>
             $(document).on('click', '.delete_lecture', function(e) {
@@ -1184,7 +1256,6 @@
                     return false;
                 }
             });
-
         </script>
         <script>
             $(document).ready(function() {
@@ -1200,7 +1271,6 @@
                 });
 
             });
-
         </script>
 
 
@@ -1221,13 +1291,30 @@
                 modal.find('.modal-body  #phone').val(phone)
                 modal.find('.modal-body  #stage_id').val(stages)
             });
-
         </script>
+
+        <script>
+            $('#editlecture').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget)
+                var id = button.data('id');
+                var title = button.data('title');
+                var desc = button.data('desc');
+
+
+                var modal = $(this)
+                modal.find('.modal-body  #id').val(id)
+                modal.find('.modal-body  #title').val(title)
+                modal.find('.modal-body  #desc').val(desc)
+
+            });
+        </script>
+
+
+
         <script>
             setTimeout(function() {
                 $('#successMsg').hide();
             }, 2000);
-
         </script>
 
     @endsection

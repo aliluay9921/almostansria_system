@@ -159,7 +159,7 @@
                     <img src="/user_image/photo_2021-05-26_18-44-37.jpg" alt="">
                     <div class="user-info">
                         <h4>أ.د. محمد فرج شذر </h4>
-                        <small>mohammed@gmail.com</small>
+                        <small>dr.marjani@uomustansiriyah.edu.iq</small>
                     </div>
                 </div>
                 <p> عميد كلية العلوم الجامعة المستنصرية

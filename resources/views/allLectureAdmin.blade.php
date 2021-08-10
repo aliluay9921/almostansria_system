@@ -17,9 +17,9 @@
                             <p class="card-text">{{ $lecture->desc }}</p>
                         </div>
                         <div class="form-group">
-                            <a href="{{ route('download', $lecture->code) }}" class="btn btn-primary m-1 ">تحميل الكود</a>
-                            <a href="" class=" btn btn-danger pr-3 m-1 ">حذف</a>
-                            <a href="" class="btn btn-success pr-3 m-1">تعديل</a>
+                            <a href="{{ route('download', $lecture->code) }}"
+                                class=" btn btn-primary btn-lg btn-block ">تحميل
+                                الكود</a>
                         </div>
                     </div>
                 </div>

@@ -41,18 +41,19 @@ class doctorController extends Controller
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $request->file->move('codepdf/', $filename);
         }
-        // if ($request->has('image')) {
-        //     $file_extension = $request->image->getClientOriginalName();
-        //     $file_nameImage = time() . '.' . $file_extension;
-        //     $path = 'image';
-        //     $request->image->move($path, $file_nameImage);
-        // }
+        if ($request->has('image')) {
+            $file_extension = $request->image->getClientOriginalName();
+            $file_nameImage = time() . '.' . $file_extension;
+            $path = 'image';
+            $request->image->move($path, $file_nameImage);
+        }
 
         $addlecture = Lecture::create([
             'title' => $request->title,
             'link' => $request->link,
             'desc' => $request->desc,
             'code' => $filename,
+            'image' => $file_nameImage,
             'user_id' => auth()->user()->id,
             'material_id' => $request->material_id
         ]);
@@ -97,6 +98,43 @@ class doctorController extends Controller
             'msg' => 'تم الحذف بنجاح',
             'id' =>  $request->id
         ]);
+    }
+    public function updateLecture(Request $request)
+    {
+
+        $lecture = Lecture::find($request->id);
+        $lecture->update([
+            'title' => $request->title,
+            'desc' => $request->desc,
+        ]);
+        if ($request->has('image')) {
+            if ($request->has('image')) {
+                $file_extension = $request->image->getClientOriginalName();
+                $file_nameImage = time() . '.' . $file_extension;
+                $path = 'image';
+                $request->image->move($path, $file_nameImage);
+            }
+            $lecture->update([
+                'image' => $file_nameImage
+            ]);
+        }
+        if ($request->has('file')) {
+
+            $file = $request->file('file');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $request->file->move('codepdf/', $filename);
+            $lecture->update([
+                'code' => $filename
+            ]);
+        }
+
+        if ($request->has('materials')) {
+            $lecture->update([
+                'material_id' => $request->materials
+            ]);
+        }
+
+        return back()->with(['message' => 'تم التحديث بنجاح']);
     }
     public function download($code)
     {

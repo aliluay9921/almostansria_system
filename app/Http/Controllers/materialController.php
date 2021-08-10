@@ -75,12 +75,22 @@ class materialController extends Controller
     }
     public function update(Request $request)
     {
-        Material::find($request->id)->update([
+        $material = Material::find($request->id);
+        $material->update([
             'title' => $request->title,
             'desc'    => $request->desc,
-            'user_id' => $request->user_id,
-            'program_id' => $request->program_id,
         ]);
+        if ($request->has('user_id')) {
+            $material->update([
+                'user_id' => $request->user_id,
+            ]);
+        }
+        if ($request->has('program_id')) {
+            $material->update([
+                'program_id' => $request->program_id,
+            ]);
+        }
+
 
         return back()->with(['message' => 'تم التحديث بنجاح']);
     }

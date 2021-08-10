@@ -24,6 +24,7 @@ class ownerController extends Controller
         $countprograms = Program::all();
         $material = Material::all();
         $lectures = Lecture::all();
+
         return view('owner', compact('countusers', 'stages', 'countprograms', 'material', 'branch', 'lectures'));
     }
 
@@ -49,7 +50,8 @@ class ownerController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'phone'    => $request->phone,
-            'image'    => $file_name
+            'image'    => $file_name,
+            'role'      => 2
         ]);
         $adduser->stages()->attach($request->stage_id);
         $stages = $request->stage_id;

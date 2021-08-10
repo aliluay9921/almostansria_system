@@ -44,6 +44,8 @@ route::post('maerial', [App\Http\Controllers\materialController::class, 'store']
 route::get('lecture/{material_id}', [App\Http\Controllers\doctorController::class, 'index'])->name('get.lecture');
 route::get('lectureAdmin/{material_id}', [App\Http\Controllers\doctorController::class, 'getlectureAdmin'])->name('get.lectureAdmin');
 route::post('lecture', [App\Http\Controllers\doctorController::class, 'store'])->name('add.lecture');
+route::put('lecture', [App\Http\Controllers\doctorController::class, 'updateLecture'])->name('updateLecture');
+
 route::delete('/lecture', [App\Http\Controllers\doctorController::class, 'delete'])->name('deletelecture');
 
 route::post('reference', [App\Http\Controllers\doctorController::class, 'create'])->name('add.reference');

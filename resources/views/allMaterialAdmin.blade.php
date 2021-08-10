@@ -46,7 +46,9 @@
                                         <td> <b>{{ $item->title }}</b></td>
                                         <td><b>{{ $item->desc }}</b></td>
                                         @if (empty($item->users->name))
-                                            <td><b>تم حذف التدريسي</b></td>
+                                            <td><b>
+                                                    <p class="text-danger">تم حذف التدريسي</p>
+                                                </b></td>
                                         @else
                                             <td>
                                                 <b>{{ $item->users->name }}</b> <br>
@@ -78,8 +80,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
-
                             </tbody>
 
                         </table>
@@ -119,7 +119,7 @@
                                             <label for="exampleFormControlSelect1"></label>
                                             <div id="doctor"></div>
                                             <select name="user_id" id="user_id" class="form-control" multiple>
-                                                TODO:: هنا بعملية تحديث اكو مشكلة انو لازم تدز يوزر هسة مديندز يوزر
+
                                                 @foreach ($doctors as $doctor)
                                                     <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
                                                 @endforeach
@@ -183,7 +183,6 @@
                 "responsive": true,
             });
         });
-
     </script>
     <script>
         $(document).on('click', '.delete_btn', function(e) {
@@ -216,25 +215,24 @@
                 return false;
             }
         });
-
     </script>
     <script>
         $('#editMatiral').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id');
             var title = button.data('title');
-            var doctor = button.data('doctor');
+            var doctor = button.data('user');
             var program = button.data('program');
             var desc = button.data('desc');
+            //   data-user
 
             var modal = $(this)
             modal.find('.modal-body  #id').val(id)
             modal.find('.modal-body  #title').val(title)
-            modal.find('.modal-body  #doctor').val(doctor)
+            modal.find('.modal-body  #user_id').val(doctor)
             modal.find('.modal-body  #program').val(program)
             modal.find('.modal-body  #desc').val(desc)
 
         });
-
     </script>
 @endsection
